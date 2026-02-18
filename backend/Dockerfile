@@ -1,0 +1,21 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+# Copy package files
+COPY package*.json ./
+
+# Install ALL dependencies first
+RUN npm install
+
+# Copy rest of the project
+COPY . .
+
+# Build TypeScript
+RUN npm run build
+
+EXPOSE 5000
+
+CMD ["node", "dist/src/server.js"]
