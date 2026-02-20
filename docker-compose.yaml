@@ -26,7 +26,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: ./docker/Dockerfile.backend
     container_name: backend
     restart: unless-stopped
     depends_on:
@@ -35,7 +35,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: ${BACKEND_PORT}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: mongodb+srv://umeshtiruvalluru:simba550@cluster0.e4qgt.mongodb.net/specforge?retryWrites=true&w=majority
       OLLAMA_API_KEY: ${OLLAMA_API_KEY}
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
@@ -45,7 +45,7 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: ./docker/Dockerfile.frontend
     container_name: frontend
     restart: unless-stopped
     depends_on:
